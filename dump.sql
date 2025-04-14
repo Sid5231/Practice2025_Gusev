@@ -27,9 +27,9 @@ SET default_table_access_method = heap;
 
 CREATE TABLE public.groups (
     group_id integer NOT NULL,
-    group_number integer NOT NULL,
+    group_number character varying(100) NOT NULL,
     institut_id integer NOT NULL,
-    specialtet_id integer
+    specialty_id integer NOT NULL
 );
 
 
@@ -54,9 +54,9 @@ ALTER TABLE public.institutes OWNER TO postgres;
 --
 
 CREATE TABLE public.specialties (
-    specialtet_id integer NOT NULL,
-    specialtet_identifier character varying(50) NOT NULL,
-    specialtet_name character varying(200) NOT NULL,
+    specialty_id integer NOT NULL,
+    specialty_identifier character varying(50) NOT NULL,
+    specialty_name character varying(200) NOT NULL,
     institut_id integer NOT NULL
 );
 
@@ -69,7 +69,7 @@ ALTER TABLE public.specialties OWNER TO postgres;
 
 CREATE TABLE public.students (
     student_id integer NOT NULL,
-    full_name character varying(200),
+    full_name character varying(200) NOT NULL,
     year_admission integer NOT NULL,
     date_birth date NOT NULL,
     group_id integer NOT NULL
@@ -82,7 +82,7 @@ ALTER TABLE public.students OWNER TO postgres;
 -- Data for Name: groups; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY public.groups (group_id, group_number, institut_id, specialtet_id) FROM stdin;
+COPY public.groups (group_id, group_number, institut_id, specialty_id) FROM stdin;
 1	1520321	1	1
 2	1521621	1	2
 3	1521721	1	3
@@ -107,7 +107,7 @@ COPY public.institutes (institut_id, name_institute, full_name, title_dean) FROM
 -- Data for Name: specialties; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY public.specialties (specialtet_id, specialtet_identifier, specialtet_name, institut_id) FROM stdin;
+COPY public.specialties (specialty_id, specialty_identifier, specialty_name, institut_id) FROM stdin;
 1	02.03.02	 ФУНДАМЕНТАЛЬНАЯ ИНФОРМАТИКА И ИНФОРМАЦИОННЫЕ ТЕХНОЛОГИИ	1
 2	02.03.03	МАТЕМАТИЧЕСКОЕ ОБЕСПЕЧЕНИЕ И АДМИНИСТРИРОВАНИЕ ИНФОРМАЦИОННЫХ СИСТЕМ	1
 3	09.03.03	ПРИКЛАДНАЯ ИНФОРМАТИКА	1
@@ -159,7 +159,7 @@ ALTER TABLE ONLY public.institutes
 --
 
 ALTER TABLE ONLY public.specialties
-    ADD CONSTRAINT specialties_pkey PRIMARY KEY (specialtet_id);
+    ADD CONSTRAINT specialties_pkey PRIMARY KEY (specialty_id);
 
 
 --
@@ -167,7 +167,7 @@ ALTER TABLE ONLY public.specialties
 --
 
 ALTER TABLE ONLY public.specialties
-    ADD CONSTRAINT specialties_specialtet_identifier_key UNIQUE (specialtet_identifier);
+    ADD CONSTRAINT specialties_specialtet_identifier_key UNIQUE (specialty_identifier);
 
 
 --
