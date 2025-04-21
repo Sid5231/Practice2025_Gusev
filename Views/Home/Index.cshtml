@@ -1,0 +1,28 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+@model List<Practice2025_Gusev.Models.Students>
+
+<div class="text-left">
+    <h1>Гусев Илья Викторович</h1>
+    <h2>Специальность: Инженерия программного обеспечения</h2>
+    <h3>студент 3 курса</h3>
+</div>
+
+<div>
+    <h3>Список студентов</h3>
+    <ul>
+        @foreach (var student in Model)
+        {
+                <li>
+                        ID: @student.student_id,<br />
+                        ФИО: @student.full_name,<br />
+                        Год поступления: @student.year_admission,<br />
+                        Дата рождения: @student.date_birth.ToShortDateString(),<br />
+                        Группа: @student.Group?.group_number, <br />
+                        Специальность: @student.Group?.Specialty?.specialty_name, <br />
+                        Институт: @student.Group?.Institute?.name_institute<br />
+                </li>
+        }
+    </ul>
+</div>
