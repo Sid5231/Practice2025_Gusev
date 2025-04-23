@@ -10,19 +10,42 @@
 </div>
 
 <div>
-    <h3>Список студентов</h3>
-    <ul>
-        @foreach (var student in Model)
-        {
-                <li>
-                        ID: @student.student_id,<br />
-                        ФИО: @student.full_name,<br />
-                        Год поступления: @student.year_admission,<br />
-                        Дата рождения: @student.date_birth.ToShortDateString(),<br />
-                        Группа: @student.Group?.group_number, <br />
-                        Специальность: @student.Group?.Specialty?.specialty_name, <br />
-                        Институт: @student.Group?.Institute?.name_institute<br />
-                </li>
-        }
-    </ul>
+    <h2>Поиск студентов по номеру группы</h2>
+    @using (Html.BeginForm("Search", "Home", FormMethod.Post))
+    {
+            <div>
+                <label for="groupNumber">Номер группы:</label>
+                <input type="text" id="groupNumber" name="groupNumber" required>
+            </div>
+            <button type="submit">Найти</button>
+    }
 </div>
+@if (Model != null && Model.Any())
+{
+  <div>
+    <h3>Список студентов</h3>
+      <ul>
+         @foreach (var student in Model)
+          {
+            <li>
+                 ID: @student.student_id,<br />
+                 ФИО: @student.full_name,<br />
+                 Год поступления: @student.year_admission,<br />
+                 Дата рождения: @student.date_birth.ToShortDateString(),<br />
+                 Группа: @student.Group?.group_number, <br />
+                 Специальность: @student.Group?.Specialty?.specialty_name, <br />
+                 Институт: @student.Group?.Institute?.name_institute<br />
+           </li>
+          }
+     </ul>
+    </div>
+}
+else
+{
+    <div>
+          <p>Группа с таким номером не найдена</p>
+    </div>
+    
+}
+
+

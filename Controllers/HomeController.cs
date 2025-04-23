@@ -23,6 +23,17 @@ namespace Practice2025_Gusev.Controllers
             return View(student);
         }
 
+        [HttpPost]
+        public IActionResult Search(string groupNumber)
+        {
+            var student = _context.students
+                .Include(s => s.Group).ThenInclude(g => g.Specialty)
+                .Include(s => s.Group).ThenInclude(g => g.Institute)
+                .Where(s => s.Group.group_number == groupNumber).ToList();
+
+            return View("Index",student);
+        }
+
         public IActionResult Privacy()
         {
             return View();
