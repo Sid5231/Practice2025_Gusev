@@ -5,15 +5,23 @@ namespace Practice2025_Gusev.Models
 {
     public class Group
     {
-        [Key]public required int group_id { get; set; }
-        public required string group_number { get; set; }
-        public required int institut_id { get; set; }
-        public required int specialty_id {  get; set; }
+        [Key]
+        [Column("group_id")]
+        public required int GroupId { get; set; }
 
-        [ForeignKey("specialty_id")]
+        [Column("group_number")]
+        public required string GroupNumber { get; set; }
+
+        [Column("institut_id")]
+        public required int InstitutId { get; set; }
+
+        [Column("specialty_id")]
+        public required int SpecialtyId {  get; set; }
+
+        [ForeignKey("SpecialtyId")]
         public virtual Specialty Specialty { get; set; }
 
-        [ForeignKey("institut_id")]
+        [ForeignKey("InstitutId")]
         public virtual Institute Institute { get; set; }
     }
 }

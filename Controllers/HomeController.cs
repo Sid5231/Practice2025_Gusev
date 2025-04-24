@@ -14,24 +14,44 @@ namespace Practice2025_Gusev.Controllers
             _context = context;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            var student = _context.students
+            try
+            {
+                var students = await _context.students
                 .Include(s => s.Group).ThenInclude(g => g.Specialty)
                 .Include(s => s.Group).ThenInclude(g => g.Institute)
-                .ToList();
-            return View(student);
+                .ToListAsync();
+                return View(students);
+            }
+            catch (Exception ex)
+            {
+                return View("Ошибка при загрузке списка студентов");
+            }
         }
 
         [HttpPost]
-        public IActionResult Search(string groupNumber)
+        public async Task<IActionResult> Search(string groupNumber)
         {
-            var student = _context.students
+
+            try
+            {
+                if (string.IsNullOrWhiteSpace(groupNumber))
+                {
+                    return View("Index", new List<Student>());
+                }
+
+                var students = await _context.students
                 .Include(s => s.Group).ThenInclude(g => g.Specialty)
                 .Include(s => s.Group).ThenInclude(g => g.Institute)
-                .Where(s => s.Group.group_number == groupNumber).ToList();
+                .Where(s => s.Group != null && s.Group.GroupNumber == groupNumber).ToListAsync();
 
-            return View("Index",student);
+                return View("Index", students);
+            }
+            catch(Exception ex)
+            {
+                return View("Ошибка при поиске студентов");
+            }
         }
 
         public IActionResult Privacy()

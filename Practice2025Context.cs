@@ -15,7 +15,7 @@ namespace Practice2025_Gusev
         public DbSet<Group> groups { get; set; }
         public DbSet<Institute> institutes { get; set; }
         public DbSet<Specialty> specialties { get; set; }
-        public DbSet<Students> students { get; set; }
+        public DbSet<Student> students { get; set; }
 
     }
 }

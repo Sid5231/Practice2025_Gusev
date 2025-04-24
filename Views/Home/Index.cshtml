@@ -1,7 +1,7 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
 }
-@model List<Practice2025_Gusev.Models.Students>
+@model List<Practice2025_Gusev.Models.Student>
 
 <div class="text-left">
     <h1>Гусев Илья Викторович</h1>
@@ -15,7 +15,7 @@
     {
             <div>
                 <label for="groupNumber">Номер группы:</label>
-                <input type="text" id="groupNumber" name="groupNumber" required>
+                <input type="text" id="groupNumber" name="groupNumber">
             </div>
             <button type="submit">Найти</button>
     }
@@ -25,16 +25,16 @@
   <div>
     <h3>Список студентов</h3>
       <ul>
-         @foreach (var student in Model)
+         @foreach (var students in Model)
           {
             <li>
-                 ID: @student.student_id,<br />
-                 ФИО: @student.full_name,<br />
-                 Год поступления: @student.year_admission,<br />
-                 Дата рождения: @student.date_birth.ToShortDateString(),<br />
-                 Группа: @student.Group?.group_number, <br />
-                 Специальность: @student.Group?.Specialty?.specialty_name, <br />
-                 Институт: @student.Group?.Institute?.name_institute<br />
+                 ID: @students.StudentId,<br />
+                 ФИО: @students.FullName,<br />
+                 Год поступления: @students.YearAdmission,<br />
+                 Дата рождения: @students.DateBirth.ToShortDateString(),<br />
+                 Группа: @students.Group?.GroupNumber, <br />
+                 Специальность: @students.Group?.Specialty?.SpecialtyName, <br />
+                 Институт: @students.Group?.Institute?.NameInstitute<br />
            </li>
           }
      </ul>

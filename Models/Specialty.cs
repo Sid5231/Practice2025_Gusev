@@ -1,13 +1,22 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Practice2025_Gusev.Models
 {
     public class Specialty
     {  
-        [Key]public required int specialty_id { get; set; }
-        public required string specialty_identifier { get; set; }
-        public required string specialty_name { get; set; }
-        public required int institut_id { get; set; }
+        [Key]
+        [Column("specialty_id")]
+        public required int SpecialtyId { get; set; }
+
+        [Column("specialty_identifier")]
+        public required string SpecialtyIdentifier { get; set; }
+
+        [Column("specialty_name")]
+        public required string SpecialtyName { get; set; }
+
+        [Column("institut_id")]
+        public required int InstitutId { get; set; }
 
     }
 }

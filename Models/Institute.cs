@@ -1,12 +1,21 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Practice2025_Gusev.Models
 {
     public class Institute
     {
-        [Key]public required int institut_id {  get; set; }
-        public required string name_institute { get; set; }
-        public required string full_name {  get; set; }
-        public required string title_dean { get; set; }
+        [Key]
+        [Column("institut_id")]
+        public required int InstitutId {  get; set; }
+
+        [Column("name_institute")]
+        public required string NameInstitute { get; set; }
+
+        [Column("full_name")]
+        public required string FullName {  get; set; }
+
+        [Column("title_dean")]
+        public required string TitleDean { get; set; }
     }
 }
